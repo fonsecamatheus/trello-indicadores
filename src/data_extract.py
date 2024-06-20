@@ -19,7 +19,7 @@ class DataExtract:
                     'data_termino': i.get('due'),
                     'id_checklist': i.get('idChecklists'),
                     'id_list': i.get('idList'),
-                    'id_members': i.get('idMembers'),
+                    'id_member': i.get('idMembers'),
                     'nome': i.get('name'),
                     'url': i.get('url'),
                     'checks_faltantes': missing_checks
@@ -28,11 +28,12 @@ class DataExtract:
                 self.cards_lists.append(data_cards_dict)
         return self.cards_lists
     
-    def data_lists_extract(self) -> List[Dict[str, str]]:
+    def data_lists_extract(self) -> List[Dict[str, Any]]:
         for i in self.response:  
     
             data_lists_dict = {
-                i.get('id') : i.get('name')
+                'id_list' : i.get('id'), 
+                'name_member' : i.get('name')
             }
             
             self.lists_lists.append(data_lists_dict)
@@ -40,8 +41,10 @@ class DataExtract:
     
     def data_members_extract(self) -> List[Dict[str, str]]:
         for i in self.response:
+            
             data_members_dict = {
-                i.get('id') : i.get('fullName')
+                'id_member' : i.get('id'), 
+                'name_member' : i.get('fullName')
             }
 
             self.members_lists.append(data_members_dict)
